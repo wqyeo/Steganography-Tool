@@ -1,4 +1,5 @@
 <script>
+	import { Toast, getToastStore } from '@skeletonlabs/skeleton';
 	import '../app.postcss';
 	import { AppShell, AppBar, initializeStores } from '@skeletonlabs/skeleton';
 	initializeStores();
@@ -44,7 +45,7 @@
 
 	import ThemeSelector from '$lib/components/appBar/ThemeSelector.svelte';
 </script>
-
+<Toast />
 <!-- App Shell -->
 <AppShell>
 	<svelte:fragment slot="header">

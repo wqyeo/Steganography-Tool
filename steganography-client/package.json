@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "vite dev",
-    "debug": "vite dev --port 4321",
+    "debug": "vite dev --host --port 4321",
     "build": "vite build",
     "preview": "vite preview",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
@@ -40,6 +40,7 @@
     "@floating-ui/dom": "1.6.5",
     "@iconify/svelte": "^4.0.2",
     "highlight.js": "11.9.0",
+    "js-cookie": "^3.0.5",
     "svelte-persisted-store": "^0.9.2"
   }
 }
