@@ -36,3 +36,5 @@ Theres a live hosted demo [here](https://stenographic.servebeer.com/).
 6. Your API endpoint is now running at `localhost:8080` _(or whatever was listed on the console)_
 
 > It is running as debug, opened to all hosts, if you need to, just edit the `app.run(debug=DEBUG_ENABLED, port=8080, host='0.0.0.0')` respectively.
+> 
+> Quick and dirty documentation on API Routes on [here](https://github.com/wqyeo/LSB-Steganography/blob/main/steganography-api/README.md).
