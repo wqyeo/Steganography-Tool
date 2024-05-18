@@ -207,8 +207,8 @@
 			fileUUID,
 			toEncode,
 			selectedRedBits,
-			selectedBlueBits,
 			selectedGreenBits,
+			selectedBlueBits,
 			keyToUse
 		);
 

@@ -61,32 +61,64 @@ def encode_png(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_
     data_len = len(binary_secret_data)
     for row in image:
         for pixel in row:
-            r, g, b = to_bin(pixel)
+            r, g, b = list(to_bin(pixel[0])), list(to_bin(pixel[1])), list(to_bin(pixel[2]))
 
             # Modify red channel bits based on r_bits_usage
             for r_bit in r_bits_usage:
                 if data_index < data_len:
-                    r = r[:r_bit] + binary_secret_data[data_index] + r[r_bit + 1:]
+                    r[r_bit] = binary_secret_data[data_index]
                     data_index += 1
 
             # Modify green channel bits based on g_bits_usage
             for g_bit in g_bits_usage:
                 if data_index < data_len:
-                    g = g[:g_bit] + binary_secret_data[data_index] + g[g_bit + 1:]
+                    g[g_bit] = binary_secret_data[data_index]
                     data_index += 1
 
             # Modify blue channel bits based on b_bits_usage
             for b_bit in b_bits_usage:
                 if data_index < data_len:
-                    b = b[:b_bit] + binary_secret_data[data_index] + b[b_bit + 1:]
+                    b[b_bit] = binary_secret_data[data_index]
                     data_index += 1
 
             # Combine modified channels and update pixel value
-            pixel[0] = int(r, 2)
-            pixel[1] = int(g, 2)
-            pixel[2] = int(b, 2)
+            pixel[0] = int(''.join(r), 2)
+            pixel[1] = int(''.join(g), 2)
+            pixel[2] = int(''.join(b), 2)
 
             # Done encoding...
             if data_index >= data_len:
                 break
+
     return image
+
+
+def debug_decode(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
+    image = cv2.imread(image_path)
+
+    print_first = False
+    extracted_payload = ""
+    for row in image:
+        for pixel in row:
+            r, g, b = bin(pixel[0])[2:].zfill(8), bin(pixel[1])[2:].zfill(8), bin(pixel[2])[2:].zfill(8)
+
+            # Extract the specified bits from the red, green, and blue channels
+            for r_bit in r_bits_usage:
+                extracted_payload += r[r_bit]
+
+            for g_bit in g_bits_usage:
+                extracted_payload += g[g_bit]
+
+            for b_bit in b_bits_usage:
+                extracted_payload += b[b_bit]
+
+            if not print_first:
+                print("DECODE :: " + r + ", " + g + ", " + b)
+                print_first = True
+
+    print("EXTRACTED :: " + extracted_payload)
+    print("Length :: " + str(len(extracted_payload)))
+
+    decoded_payload = "".join([chr(int(extracted_payload[i:i+8], 2)) for i in range(0, len(extracted_payload), 8)])
+    # Find the ending payload and truncate the extracted payload
+    end_index = decoded_payload.find(ending_payload)

@@ -115,8 +115,7 @@ def encode_file(uuid):
 
         # Save...
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], uuid, file_uuid + ".png")
-        cv2.imwrite(file_path, image)
-
+        cv2.imwrite(file_path, image, [cv2.IMWRITE_PNG_COMPRESSION, 0])
         return jsonify({'status': 'SUCCESS', 'message': 'UUID and array of numbers are valid', 'uuid': file_uuid})
     except ValueError:
         return jsonify({'status': 'PAYLOAD_TOO_LARGE', 'message': "Payload is too large for the file, consider lowing the payload size!"})

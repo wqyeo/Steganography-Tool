@@ -27,15 +27,17 @@ def decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_us
     extracted_payload = ""
     for row in image:
         for pixel in row:
-            r, g, b = pixel[0], pixel[1], pixel[2]
+            r, g, b = bin(pixel[0])[2:].zfill(8), bin(pixel[1])[2:].zfill(8), bin(pixel[2])[2:].zfill(8)
 
             # Extract the specified bits from the red, green, and blue channels
             for r_bit in r_bits_usage:
-                extracted_payload += str((r >> (7 - r_bit)) & 1)
+                extracted_payload += r[r_bit]
+
             for g_bit in g_bits_usage:
-                extracted_payload += str((g >> (7 - g_bit)) & 1)
+                extracted_payload += g[g_bit]
+
             for b_bit in b_bits_usage:
-                extracted_payload += str((b >> (7 - b_bit)) & 1)
+                extracted_payload += b[b_bit]
 
     decoded_payload = "".join([chr(int(extracted_payload[i:i+8], 2)) for i in range(0, len(extracted_payload), 8)])
     # Find the ending payload and truncate the extracted payload
