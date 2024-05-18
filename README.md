@@ -8,6 +8,10 @@ Decode any `png` file. You will need to know the RGB bits used to encode, and th
 
 > ⚠️ This was hacked together in one day for a small university coursework. The codebase is messy and many things are hard-coded. You have been warned.
 
+Theres a live hosted demo [here](https://stenographic.servebeer.com/).
+
+> ⚠️ DO NOT upload any sensitive photos there. Thats kinda about it. Also, its hosted on a VM with really bad specifications, so some picture processing might take some time.
+
 ## Development Setup
 
 > Both deployment setup have been tested on Debian 12. No guarantees it will work on other operating systems...
