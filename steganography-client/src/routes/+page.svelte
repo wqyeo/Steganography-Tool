@@ -47,6 +47,8 @@
 			uploadedFile = true;
 			if (encodeResult.type.startsWith("image")) {
 				goto(`/encode-picture#file_uuid=${fileUUID}`);
+			} else if (encodeResult.type.startsWith("audio")) {
+				goto(`/encode-audio#file_uuid=${fileUUID}`);
 			} else {
 				console.warn(`No page created for uploaded file of type ${encodeResult.type}`)
 			}
