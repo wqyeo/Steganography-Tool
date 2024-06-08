@@ -73,7 +73,7 @@ def decode_file(request):
             lsb_count = int(request.POST.get("lsb_count", "0"))
             if lsb_count < 0 or lsb_count >= 8:
                 return JsonResponse({'status': 'BAD_BITS', 'message': 'lsb_count must be a integer between 0 and 7.'}, status=400)
-            return _handle_decoded_payload(wav_decoder_controller(secret_key, matching_file, lsb_count))
+            return _handle_decoded_payload(wav_decoder_controller(secret_key, matching_file, lsb_count + 1))
 
 
         return JsonResponse({'status': 'ERROR', 'message': 'Unknown error, contact admin!'})

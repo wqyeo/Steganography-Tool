@@ -97,7 +97,7 @@ def encode_file(request):
             lsb_count = int(request.POST.get("lsb_count", "0"))
             if lsb_count < 0 or lsb_count >= 8:
                 return JsonResponse({'status': 'BAD_BITS', 'message': 'lsb_count must be a integer between 0 and 7.'}, status=400)
-            return wav_encoder_controller(message, secret_key, matching_file, lsb_count)
+            return wav_encoder_controller(message, secret_key, matching_file, lsb_count + 1)
 
         return JsonResponse({'status': 'UNIMPLEMENTED', 'message': 'An error occured. Likely trying to encode a unsupported file type!'}, status=500)
     except ValueError as e:
