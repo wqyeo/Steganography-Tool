@@ -116,7 +116,7 @@
 
 		<!--Bits Selection-->
 		<h3 class="h3 mt-2">Select LSB Bits</h3>
-		<RangeSlider name="range-slider" bind:value={lsbSelection} max={7} step={1} ticked>LSB Select</RangeSlider>
+		<RangeSlider name="range-slider" bind:value={lsbSelection} max={7} step={1} ticked>{lsbSelection}</RangeSlider>
 
 		<hr class="hr !border-t-4 !border mt-5" />
 		<h3 class="h3 mt-2">Set Message and Keys</h3>
