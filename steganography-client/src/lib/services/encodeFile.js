@@ -17,11 +17,12 @@ export default async function encodeFile(
 ) {
 
     const data = {
+        file_uuid: uuid,
         r_bits: redBits,
         g_bits: greenBits,
         b_bits: blueBits,
-        to_encode: toEncode,
-        end_key: endKey 
+        message: toEncode,
+        secret_key: endKey
     };
 
     const options = {
@@ -33,7 +34,7 @@ export default async function encodeFile(
     };
 
     const baseApiRoute = getApiHttpRoute()
-    const response = await fetch(`${baseApiRoute}/encode-file/${uuid}`, options)
+    const response = await fetch(`${baseApiRoute}/encode`, options)
 
     const replyJson = await response.json()
     console.log(`response:`)

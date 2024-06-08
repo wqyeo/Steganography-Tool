@@ -302,3 +302,5 @@ pgdata/
 # Django migrations and uploaded files
 migrations/
 uploads/
+
+!steganography-client/src/lib

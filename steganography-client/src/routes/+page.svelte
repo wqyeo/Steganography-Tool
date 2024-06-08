@@ -15,6 +15,7 @@
 	import { SlideToggle } from '@skeletonlabs/skeleton';
 	import BitSelectionGroup from '$lib/components/bitsSelector.svelte';
 	import decodeFile from '$lib/services/decodeFile';
+	import UploadFile from '$lib/components/uploadFile/UploadFile.svelte';
 
 	/**
 	 * @type {FileList}
@@ -145,8 +146,8 @@
 		isEncoding = false
 
 		if (response.status == "SUCCESS") {
-			decodedMessage = response.message
-			keyUsedSuccessfully = (response.key_used == true || response.key_used.toString() == "true")
+			decodedMessage = response.decoded
+			keyUsedSuccessfully = (response.found == true || response.found.toString() == "true")
 
 			if (decodedMessage == ""){
 				decodedMessage = "No message has been found!"
@@ -241,15 +242,7 @@
 <div class="container h-full mx-auto flex justify-center mt-9">
 	<div class="space-y-4 text-center flex flex-col items-center take-viewport">
 		{#if !uploadedFile}
-			<FileDropzone name="files" bind:files on:change={onFileUploadedHandler}>
-				<svelte:fragment slot="lead">
-					<Icon icon="line-md:upload-loop" width="192" height="192" />
-				</svelte:fragment>
-				<svelte:fragment slot="message">
-					<b>Upload a file</b> or drag and drop
-				</svelte:fragment>
-				<svelte:fragment slot="meta">512KiB Max. PNG allowed.</svelte:fragment>
-			</FileDropzone>
+			<UploadFile files={files} onFileUploadedHandler={onFileUploadedHandler}/>
 		{:else if uploadingFile}
 			<div class="ProgressRadialWrapper">
 				<ProgressRadial value={undefined} />

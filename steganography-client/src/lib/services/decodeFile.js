@@ -15,10 +15,11 @@ export default async function decodeFile(
 ) {
 
     const data = {
+        file_uuid: uuid,
         r_bits: redBits,
         g_bits: greenBits,
         b_bits: blueBits,
-        end_key: endKey 
+        secret_key: endKey 
     };
 
     const options = {
@@ -30,7 +31,7 @@ export default async function decodeFile(
     };
 
     const baseApiRoute = getApiHttpRoute()
-    const response = await fetch(`${baseApiRoute}/decode-file/${uuid}`, options)
+    const response = await fetch(`${baseApiRoute}/decode`, options)
 
     const replyJson = await response.json()
     console.log(`response:`)

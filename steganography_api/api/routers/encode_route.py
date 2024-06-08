@@ -94,6 +94,8 @@ def encode_file(request):
             return _handle_save_png_image(image, matching_file)
 
         return JsonResponse({'status': 'ERROR', 'message': 'Unknown error, contact admin!'})
+    except ValueError as e:
+        return JsonResponse({'status': 'PAYLOAD_TOO_LARGE'}, status=400)
     except Exception as e:
         print(f"Error occurred encoding file :: {e}", flush=True)
         return JsonResponse({'status': 'ERROR'}, status=500)

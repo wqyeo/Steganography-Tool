@@ -10,7 +10,7 @@ export default async function uploadForEncode(file) {
 
     try {
         const baseApiRoute = getApiHttpRoute()
-        const response = await fetch(`${baseApiRoute}/encode-upload`, {
+        const response = await fetch(`${baseApiRoute}/upload`, {
             method: 'POST',
             body: formData
         });
