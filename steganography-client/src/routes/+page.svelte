@@ -304,7 +304,7 @@
 
 				<!--Bit selection tickboxes-->
 				<h4 class="h4">Select Bits to use</h4>
-				<h4 class="h6">Red</h4>
+				<h4 class="h6 ">Red</h4>
 				<BitSelectionGroup bind:selectedNumbers={selectedRedBits} />
 				<h4 class="h6">Green</h4>
 				<BitSelectionGroup bind:selectedNumbers={selectedGreenBits} />
