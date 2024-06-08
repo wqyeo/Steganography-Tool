@@ -13,6 +13,7 @@ def wav_encoder_controller(text, secret_key, matching_file, lsb_count):
     Original written by TPeiWen from https://github.com/TPeiWen/audio_stego
 
     text: Message to encode
+    secret_key: Secret key to end the message with.
     matching_file: Original matching FileModel (WAV File)
     lsb_count: How many LSB bits to use up
     """
@@ -22,7 +23,6 @@ def wav_encoder_controller(text, secret_key, matching_file, lsb_count):
         frames = audio_file.readframes(-1)
         frames = np.frombuffer(frames, dtype=np.int16)
         binary_text = "".join(format(ord(char), "08b") for char in full_text)
-        binary_text += "00000000"
         text_index = 0
         encoded_frames = frames.copy()
 
