@@ -15,7 +15,7 @@
 		document.body.setAttribute('data-theme', get(themePreference));
 
 		const currentRoute = window.location.pathname;
-		isLoginOrRegisterRoute = currentRoute === '/login' || currentRoute === '/register'
+		isLoginOrRegisterRoute = currentRoute === '/login' || currentRoute === '/register';
 	});
 
 	import Socials from '$lib/components/appBar/Socials.svelte';
@@ -45,6 +45,7 @@
 
 	import ThemeSelector from '$lib/components/appBar/ThemeSelector.svelte';
 </script>
+
 <Toast />
 <!-- App Shell -->
 <AppShell>
@@ -52,7 +53,7 @@
 		<!-- App Bar -->
 		<AppBar gridColumns="grid-cols-3" slotDefault="place-self-center" slotTrail="place-content-end">
 			<svelte:fragment slot="lead">
-				<h3 class="h3 ml-auto">Steganography Tool</h3>
+				<a class="h3 ml-auto" href="/">Steganography Tool</a>
 			</svelte:fragment>
 
 			<svelte:fragment slot="trail">
