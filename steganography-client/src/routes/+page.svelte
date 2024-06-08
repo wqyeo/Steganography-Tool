@@ -18,6 +18,9 @@
 	import decodeFile from '$lib/services/decodeFile';
 	import UploadFile from '$lib/components/uploadFile/UploadFile.svelte';
 	import { goto } from '$app/navigation';
+	import RecentFilesTable from '$lib/components/RecentFilesTable.svelte';
+	import { onMount } from 'svelte';
+	import fetchRecentFiles from '$lib/services/fetchRecentFiles';
 
 	/**
 	 * @type {FileList}
@@ -72,6 +75,18 @@
 
 		console.error(encodeResult.message);
 	}
+
+	/**
+	 * @type {any[]}
+	 */
+	let recentFiles = []
+	onMount(() => {
+		fetchRecentFiles().then((jsonData) => {
+			if (jsonData.status == "SUCCESS") {
+				recentFiles = jsonData.data;
+			}
+		})
+	})
 </script>
 
 <div class="container h-full mx-auto flex justify-center mt-9">
@@ -83,5 +98,19 @@
 				<ProgressRadial value={undefined} />
 			</div>
 		{/if}
+
+		{#if recentFiles.length >= 1}
+			<hr class="hr !border-t-4 !border mt-5" />
+			<h3 class="h3 mt-2 mb-3">Recently Uploaded Files</h3>
+			<RecentFilesTable bind:recentFiles={recentFiles}/>
+		{/if}
 	</div>
 </div>
+
+<style>
+	.hr {
+		width: 95%;
+		max-width: 95%;
+		margin: 0 auto;
+	}
+</style>
