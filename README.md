@@ -1,16 +1,14 @@
 ## What is this?
 
-A LSB Replacement Steganography and Steganalysis browser program.
+A Steganography Web Application.
 
-Encode a message into a `png` file, by inputting a ending key, message, and desired bits to use on RGB of the image.
-
-Decode any `png` file. You will need to know the RGB bits used to encode, and the ending key.
-
-> ⚠️ This was hacked together in one day for a small university coursework. The codebase is messy and many things are hard-coded. You have been warned.
+**Supported Files**
+- PNG
+- WAV
 
 Theres a live hosted demo [here](https://stenographic.servebeer.com/).
 
-> ⚠️ DO NOT upload any sensitive photos there. Thats kinda about it. Also, its hosted on a VM with really bad specifications, so some picture processing might take some time.
+> ⚠️ DO NOT upload any sensitive photos there. Thats kinda about it. Also, its hosted on a VM with really bad specifications, so processing a larger file might take some time.
 
 ## Development Setup
 
@@ -31,3 +29,5 @@ The database for the API endpoint will be empty initally:
 2. Run `migration-helpers.sh`
 
 In the event that the script does not work (no output, error messages), consider running the commands in the shell script manually.
+
+> ⚠️ This was hacked together for a small university coursework. The codebase is messy and many things are hard-coded.<br>You have been warned.
