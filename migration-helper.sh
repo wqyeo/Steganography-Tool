@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Connect to the Django container
-docker exec -it lsb-steganography_api_1 /bin/bash << EOF
+docker exec -it steganography-tool_api_1 /bin/bash << EOF
 
 # Navigate to the Django project directory
 cd /app

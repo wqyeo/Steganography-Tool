@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 import uuid as uuidgen
 
+from django.core.files import File
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
