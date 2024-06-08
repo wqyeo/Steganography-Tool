@@ -10,14 +10,12 @@ export default async function uploadForEncode(file) {
 
     try {
         const baseApiRoute = getApiHttpRoute()
-        const response = await fetch(`${baseApiRoute}/encode-upload`, {
+        const response = await fetch(`${baseApiRoute}/upload`, {
             method: 'POST',
             body: formData
         });
 
         const data = await response.json();
-        console.log("Recieved data :: ")
-        console.log(data)
         return data
     } catch (error) {
         console.error('Error:', error);

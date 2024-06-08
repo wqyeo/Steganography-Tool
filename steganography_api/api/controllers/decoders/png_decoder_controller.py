@@ -11,17 +11,7 @@ def to_bin(data):
     else:
         raise TypeError("Type not supported!")
 
-def decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
-    """
-    Decodes a PNG image to extract hidden payload.
-
-    - image: The encoded image
-    - r_bits_usage: Which bits were used for red during encoding
-    - g_bits_usage: Which bits were used for green during encoding
-    - b_bits_usage: Which bits were used for blue during encoding
-
-    Returns the extracted payload.
-    """
+def _linear_decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
     image = cv2.imread(image_path)
 
     extracted_payload = ""
@@ -32,13 +22,13 @@ def decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_us
             # Extract the specified bits from the red, green, and blue channels
             for r_bit in r_bits_usage:
                 extracted_payload += r[r_bit]
-
             for g_bit in g_bits_usage:
                 extracted_payload += g[g_bit]
 
             for b_bit in b_bits_usage:
                 extracted_payload += b[b_bit]
-
+    del image
+    
     decoded_payload = "".join([chr(int(extracted_payload[i:i+8], 2)) for i in range(0, len(extracted_payload), 8)])
     # Find the ending payload and truncate the extracted payload
     end_index = decoded_payload.find(ending_payload)
@@ -51,3 +41,16 @@ def decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_us
         "found": key_used,
         "decoded": decoded_payload
     }
+
+def png_decoder_controller(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage, generator_type):
+    """
+    Decodes a PNG image to extract hidden payload.
+
+    - image: The encoded image
+    - r_bits_usage: Which bits were used for red during encoding
+    - g_bits_usage: Which bits were used for green during encoding
+    - b_bits_usage: Which bits were used for blue during encoding
+
+    Returns the extracted payload.
+    """
+    return _linear_decode_png(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage)

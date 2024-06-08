@@ -25,23 +25,9 @@ def check_bits_usage(r_bits_usage, g_bits_usage, b_bits_usage):
         return False
     return True
 
-def encode_png(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
+def _linear_encode_png(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
     """
-    Encodes a PNG image
-
-    - image_path: Path to the image
-    - secret_payload: The payload to hide
-    - ending_payload: Ending signal for payload
-    - r_bits_usage: Which bits to use for red during encoding
-    - g_bits_usage: Which bits to use for green during encoding
-    - b_bits_usage: Which bits to use for blue during encoding
-    (7 is MSB, 0 is LSB)
-
-    Returns the image.
-    Raises `TypeError` if bad image
-    Raises `ValueError` is the image is too small for the payload
-
-    DOES NOT VALIDATE IF THE BITS USAGE ARE VALID OR NOT, USE `check_bits_usage` BEFORE INVOKING THIS
+    linear encoding (top-left to bottom-right)
     """
     image = cv2.imread(image_path)
 
@@ -92,33 +78,25 @@ def encode_png(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_
 
     return image
 
+def png_encoder_controller(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage, generator_type):
+    """
+    Encodes a PNG image
 
-def debug_decode(image_path, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage):
-    image = cv2.imread(image_path)
+    - image_path: Path to the image
+    - secret_payload: The payload to hide
+    - ending_payload: Ending signal for payload
+    - r_bits_usage: Which bits to use for red during encoding
+    - g_bits_usage: Which bits to use for green during encoding
+    - b_bits_usage: Which bits to use for blue during encoding
+    (7 is MSB, 0 is LSB)
+    - generator_type: Either 'linear' or 'fibonacci
 
-    print_first = False
-    extracted_payload = ""
-    for row in image:
-        for pixel in row:
-            r, g, b = bin(pixel[0])[2:].zfill(8), bin(pixel[1])[2:].zfill(8), bin(pixel[2])[2:].zfill(8)
+    Returns the image.
+    Raises `TypeError` if bad image
+    Raises `ValueError` is the image is too small for the payload
 
-            # Extract the specified bits from the red, green, and blue channels
-            for r_bit in r_bits_usage:
-                extracted_payload += r[r_bit]
+    DOES NOT VALIDATE IF THE BITS USAGE ARE VALID OR NOT, USE `check_bits_usage` BEFORE INVOKING THIS
+    """
 
-            for g_bit in g_bits_usage:
-                extracted_payload += g[g_bit]
-
-            for b_bit in b_bits_usage:
-                extracted_payload += b[b_bit]
-
-            if not print_first:
-                print("DECODE :: " + r + ", " + g + ", " + b)
-                print_first = True
-
-    print("EXTRACTED :: " + extracted_payload)
-    print("Length :: " + str(len(extracted_payload)))
-
-    decoded_payload = "".join([chr(int(extracted_payload[i:i+8], 2)) for i in range(0, len(extracted_payload), 8)])
-    # Find the ending payload and truncate the extracted payload
-    end_index = decoded_payload.find(ending_payload)
+    # TODO: Handle other generator types.
+    return _linear_encode_png(image_path, secret_payload, ending_payload, r_bits_usage, g_bits_usage, b_bits_usage)
