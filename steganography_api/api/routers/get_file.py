@@ -1,4 +1,4 @@
-from django.http import FileResponse
+from django.http import FileResponse, JsonResponse
 from django.shortcuts import get_object_or_404
 from ..models import FileModel
 
