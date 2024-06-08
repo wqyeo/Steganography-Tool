@@ -22,7 +22,7 @@ def get_recent_files_data(request):
                 "name": file.file_name,
                 "type": file.file_type,
                 "parent": original_encoded_id,
-                "created_at": file.created_at
+                "created_at": file.created_at.strftime('%Y-%m-%d %H:%M:%S'),
             })
         return JsonResponse({'data': data, "status": "SUCCESS"}, status=200)
     except Exception as e:
