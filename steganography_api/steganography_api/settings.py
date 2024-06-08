@@ -16,8 +16,6 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECURE_CONTENT_TYPE_NOSNIFF = False
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -25,7 +23,8 @@ SECURE_CONTENT_TYPE_NOSNIFF = False
 SECRET_KEY = 'django-insecure-)e3o-#^%9+&z5xjm5bnrab+8_83uf*w_ed@0bi$kq8c%!)u^v_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+POSTGRES_ADDRESS = os.environ.get('POSTGRESQL_ADDRESS', 'database')
+DEBUG = os.environ.get('API_DEBUG', 'False') != "True"
 
 ALLOWED_HOSTS = ['*']
 

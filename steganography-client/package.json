@@ -6,7 +6,7 @@
     "dev": "vite dev",
     "debug": "vite dev --host --port 4321",
     "build": "vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --host --port 4321",
     "check": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json",
     "check:watch": "svelte-kit sync && svelte-check --tsconfig ./jsconfig.json --watch",
     "lint": "prettier --check . && eslint .",
