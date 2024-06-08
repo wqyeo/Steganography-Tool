@@ -9,8 +9,6 @@
      * @type {string | null}
      */
     export let comparisonUUID = null;
-
-    console.log(getApiHttpRoute())
 </script>
 
 <section class="grid grid-cols-2 md:grid-cols-2 gap-4">

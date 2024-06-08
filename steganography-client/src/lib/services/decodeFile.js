@@ -30,7 +30,5 @@ export default async function decodeFile(
     const response = await fetch(`${baseApiRoute}/decode`, options)
 
     const replyJson = await response.json()
-    console.log(`response:`)
-    console.log(replyJson)
     return replyJson;
 }

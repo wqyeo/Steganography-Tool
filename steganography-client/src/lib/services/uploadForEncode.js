@@ -16,8 +16,6 @@ export default async function uploadForEncode(file) {
         });
 
         const data = await response.json();
-        console.log("Recieved data :: ")
-        console.log(data)
         return data
     } catch (error) {
         console.error('Error:', error);

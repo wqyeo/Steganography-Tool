@@ -9,6 +9,8 @@
 	import { getToastStore } from '@skeletonlabs/skeleton';
 	import StartDecodingSelector from '$lib/components/StartDecodingSelector.svelte';
 	import { goto } from '$app/navigation';
+	import fetchRelatedFiles from '$lib/services/fetchRelatedFiles';
+	import RelatedFilesTable from '$lib/components/RelatedFilesTable.svelte'
 
 	const toastStore = getToastStore();
 
@@ -24,17 +26,27 @@
 
 	let isEncoding = false;
 
+	/**
+	 * @type {any[]}
+	 */
+	let relatedFiles = []
+
 	onMount(() => {
 		// Get the file_uuid from the URL fragment
 		const fragment = new URLSearchParams(location.hash.slice(1));
 		const uuid = fragment.get('file_uuid');
 		if (uuid == null) {
 			console.warn("UUID in fragment header not set!")
-			originalUUID = '31c8b454-feb0-4cc5-b05a-014d3ba96cc4';
+			goto("/")
 			return
 		}
 
 		originalUUID = uuid;
+		fetchRelatedFiles(uuid).then((jsonData) => {
+			if (jsonData.status == "SUCCESS") {
+				relatedFiles = jsonData.data 
+			}
+		})
 	});
 
 	function useEncodedAsBase() {
@@ -123,6 +135,12 @@
 		<hr class="hr !border-t-4 !border mt-5" />
 		<h3 class="h3 mt-2">Set Message and Keys</h3>
 		<EncodingForms requestEncode={sendEncodeRequest} disabled={isEncoding}/>
+
+		{#if relatedFiles.length >= 1}
+			<hr class="hr !border-t-4 !border mt-5" />
+			<h3 class="h3 mt-2 mb-3">Related Files</h3>
+			<RelatedFilesTable bind:relatedFiles={relatedFiles}/>
+		{/if}
 	</div>
 </div>
 

@@ -33,7 +33,5 @@ export default async function encodeFile(
     const response = await fetch(`${baseApiRoute}/encode`, options)
 
     const replyJson = await response.json()
-    console.log(`response:`)
-    console.log(replyJson)
     return replyJson;
 }
