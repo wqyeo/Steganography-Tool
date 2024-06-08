@@ -13,11 +13,18 @@
 
         console.log(currentUrl)
 
-        if (currentUrl.includes('encode-picture')) {
+        let urlRoute = ''
+        if (row.type == "image/png") {
+            urlRoute = "encode-picture"
+        } else if (row.type == "audio/x-wav" || row.type == "audio/wav") {
+            urlRoute = "encode-audio"
+        }
+
+        if (currentUrl.includes(urlRoute)) {
             location.hash = newFragment;
             location.reload();
         } else {
-            goto(`/encode-picture${newFragment}`);
+            goto(`/${urlRoute}${newFragment}`);
         }
     }
 </script>
