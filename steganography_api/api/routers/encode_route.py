@@ -24,7 +24,9 @@ def _handle_save_png_image(image, matching_file):
     new_file_instance = None
     with tempfile.TemporaryDirectory(dir="") as temp_dir:
         temp_dir_name_without_prefix = temp_dir.replace('/app/', '')
-        temp_file_path = os.path.join(temp_dir_name_without_prefix, "encoded_image.png")
+
+        file_name = "encoded_" + matching_file.file_name
+        temp_file_path = os.path.join(temp_dir_name_without_prefix, file_name)
         cv2.imwrite(str(temp_file_path), image)
 
         # Open the temporary file and save it to a new FileModel instance
@@ -34,7 +36,7 @@ def _handle_save_png_image(image, matching_file):
                 file=new_file,
                 encoded_from=matching_file,
                 file_type='image/png',
-                file_name="encoded_image.png"
+                file_name=file_name
             )
             new_file_instance.save()
         
