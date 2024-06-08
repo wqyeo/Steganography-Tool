@@ -1,8 +1,11 @@
 <script>
+	import isWhitespaceOrEmpty from "$lib/isWhitespaceOrEmpty";
+
     /**
 	 * @type {(message: string, keyToUse: string) => void}
 	 */
 	export let requestEncode;
+	export let disabled = false;
 
     let message = ''
 	let keyToUse = "==END=="
@@ -28,8 +31,7 @@
 	/>
 </label>
 
-<!--Send-->
-<button type="button" class="btn variant-filled" on:click={(event) => requestEncode(message, keyToUse)}>
+<button type="button" disabled={disabled || (isWhitespaceOrEmpty(message) || isWhitespaceOrEmpty(keyToUse))} class="btn variant-filled" on:click={(event) => requestEncode(message, keyToUse)}>
 	<span>Encode!</span>
 </button>
 

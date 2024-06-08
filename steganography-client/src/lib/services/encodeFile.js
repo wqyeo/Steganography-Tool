@@ -16,21 +16,17 @@ export default async function encodeFile(
     endKey = "==END=="
 ) {
 
-    const data = {
-        file_uuid: uuid,
-        r_bits: redBits,
-        g_bits: greenBits,
-        b_bits: blueBits,
-        message: toEncode,
-        secret_key: endKey
-    };
+    const formData = new FormData();
+    formData.append('file_uuid', uuid);
+    formData.append('r_bits', JSON.stringify(redBits));
+    formData.append('g_bits', JSON.stringify(greenBits));
+    formData.append('b_bits', JSON.stringify(blueBits));
+    formData.append('message', toEncode);
+    formData.append('secret_key', endKey);
 
     const options = {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
+        body: formData
     };
 
     const baseApiRoute = getApiHttpRoute()

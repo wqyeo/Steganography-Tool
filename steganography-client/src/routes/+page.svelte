@@ -1,4 +1,5 @@
 <script>
+	// NOTE: Upload page...
 	import { getToastStore } from '@skeletonlabs/skeleton';
 
 	const toastStore = getToastStore();
