@@ -1,0 +1,8 @@
+Django===5.0.6
+psycopg2-binary==2.9.9
+channels===3.0.5
+SQLAlchemy===2.0.23
+cryptography===42.0.6
+django-cors-headers===4.3.1
+pytz===2024.1 
+requests===2.32.2
