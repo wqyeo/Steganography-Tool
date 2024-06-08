@@ -299,4 +299,6 @@ redis_data/*
 myenv/
 pgdata/
 
+# Django migrations and uploaded files
 migrations/
+uploads/
