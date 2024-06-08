@@ -16,5 +16,8 @@
     <svelte:fragment slot="message">
         <b>Upload a file</b> or drag and drop
     </svelte:fragment>
-    <svelte:fragment slot="meta">2Mb Max. PNG allowed.</svelte:fragment>
+    <svelte:fragment slot="meta">
+        <b>2MB Max</b>
+        <p>PNG, WAV allowed</p>
+    </svelte:fragment>
 </FileDropzone>
