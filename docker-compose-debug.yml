@@ -31,6 +31,8 @@ services:
     command: >
       bash -c "
         cd app &&
+        apt-get update && 
+        apt-get install ffmpeg libsm6 libxext6 -y &&
         pip install --no-cache-dir -r requirements.txt &&
         sleep ${STARTUP_DELAY} &&
         python manage.py runserver 0.0.0.0:8000
