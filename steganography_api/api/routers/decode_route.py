@@ -36,11 +36,11 @@ def decode_file(request):
 
         # Check if any of these are left empty/blank
         if not file_id or not secret_key:
-            return JsonResponse({'status': 'ERROR', 'message': 'Required fields are missing.'}, status=400)
+            return JsonResponse({'status': 'MISSING_FIELDS', 'message': 'Required fields are missing.'}, status=400)
 
         # Validate if all 3 arrays are empty
         if not r_bits and not g_bits and not b_bits:
-            return JsonResponse({'status': 'ERROR', 'message': 'At least one bit array should be provided.'}, status=400)
+            return JsonResponse({'status': 'MISSING_FIELDS', 'message': 'At least one bit array should be provided.'}, status=400)
 
         # Function to validate the bits array
         def validate_bits(bits):
@@ -53,7 +53,7 @@ def decode_file(request):
             return True
 
         if not validate_bits(r_bits) or not validate_bits(g_bits) or not validate_bits(b_bits):
-            return JsonResponse({'status': 'ERROR', 'message': 'Bits arrays must be unique integers between 0 and 7.'}, status=400)
+            return JsonResponse({'status': 'BAD_BITS', 'message': 'Bits arrays must be unique integers between 0 and 7.'}, status=400)
 
         matching_file = get_object_or_404(FileModel, id=file_id)
 
