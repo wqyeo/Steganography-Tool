@@ -16,25 +16,18 @@ Theres a live hosted demo [here](https://stenographic.servebeer.com/).
 
 > Both deployment setup have been tested on Debian 12. No guarantees it will work on other operating systems...
 
-### Client
+1. Install [Docker Engine](https://docs.docker.com/engine/install/) with Docker Compose
+2. Create a enviornment variable file. `touch .env`.
+3. Fill in the enviornment variable file based on the example file, `.env.example`.
+4. `docker-compose -f docker-compose-debug up`
+5. Visit your webpage at `localhost:4321`.
+6. Your API endpoint should be running at `localhost:8000`
 
-1. Install [NodeJS v20.13.1](https://nodejs.org/en).
-2. `cd steganography-client`
-3. `npm install`
-4. `npm run debug`
-5. Visit your webpage at `localhost:4321` _(or whatever was listed on the console)_
+### Perform Database Migrations
 
-> If you need to run as production instead, use `npm run build`, then `npm run preview`.
+The database for the API endpoint will be empty initally:
 
-### API
+1. Give execution access to `migration-helpers.sh`.
+2. Run `migration-helpers.sh`
 
-1. Install [Python v3.12.3](https://www.python.org/)
-2. `cd steganography-api`
-3. _(Optional)_ Create a python virtual enviornment, then activate it; `python3 -m venv venv` > `source venv/bin/activate`
-4. `pip install -r requirements.txt`
-5. `python3 app.py`
-6. Your API endpoint is now running at `localhost:8080` _(or whatever was listed on the console)_
-
-> It is running as debug, opened to all hosts, if you need to, just edit the `app.run(debug=DEBUG_ENABLED, port=8080, host='0.0.0.0')` respectively.
-> 
-> Quick and dirty documentation on API Routes on [here](https://github.com/wqyeo/LSB-Steganography/blob/main/steganography-api/README.md).
+In the event that the script does not work (no output, error messages), consider running the commands in the shell script manually.
