@@ -23,7 +23,7 @@
 </label>
 
 <button type="button" disabled={disabled || isWhitespaceOrEmpty(keyToUse)} class="btn variant-filled" on:click={(event) => 	requestDecode(keyToUse)}>
-	<span>Encode!</span>
+	<span>Decode!</span>
 </button>
 
 

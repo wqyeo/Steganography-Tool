@@ -1,5 +1,5 @@
 <script>
-    export let selectedNumbers = [0];
+    export let selectedNumbers = [7];
 
 	/**
 	 *
@@ -19,7 +19,7 @@
 </script>
 
 <div class="tickboxes">
-    {#each Array.from({ length: 8 }, (_, i) => i).reverse() as number}
+    {#each Array.from({ length: 8 }, (_, i) => i) as number}
         <div class="tickbox">
             <input
                 type="checkbox"

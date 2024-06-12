@@ -22,7 +22,7 @@ export default async function decodeFile(
     formData.append('g_bits', JSON.stringify(greenBits));
     formData.append('b_bits', JSON.stringify(blueBits));
     formData.append('secret_key', endKey);
-    formData.append('generator_Type', generatorType)
+    formData.append('generator_type', generatorType)
     
     const options = {
         method: 'POST',

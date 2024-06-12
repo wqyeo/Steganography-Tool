@@ -250,7 +250,7 @@ def png_encoder_controller(image_path, secret_payload, ending_payload, r_bits_us
     - r_bits_usage: Which bits to use for red during encoding
     - g_bits_usage: Which bits to use for green during encoding
     - b_bits_usage: Which bits to use for blue during encoding
-    (7 is MSB, 0 is LSB)
+    (7 is LSB, 0 is MSB)
     - generator_type: Either 'linear', 'random' or 'fibonacci
 
     Returns the image.

@@ -25,7 +25,7 @@ export default async function encodeFile(
     formData.append('b_bits', JSON.stringify(blueBits));
     formData.append('message', toEncode);
     formData.append('secret_key', endKey);
-    formData.append('generator_Type', generatorType)
+    formData.append('generator_type', generatorType)
     
     const options = {
         method: 'POST',

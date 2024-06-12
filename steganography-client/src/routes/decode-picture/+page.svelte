@@ -15,9 +15,9 @@
 
 	let originalUUID = '';
 
-	let redBitsSelection = [0]
-	let greenBitsSelection = [0]
-	let blueBitsSelection = [0]
+	let redBitsSelection = [7]
+	let greenBitsSelection = [7]
+	let blueBitsSelection = [7]
 
 	let isDecoding = false;
 
@@ -90,6 +90,7 @@
 		
 		<!--Bits Selection-->
 		<h3 class="h3 mt-2">Select Bits</h3>
+		<blockquote class="blockquote">By index; 0 is MSB, 7 is LSB</blockquote>
 		<ul class="list">
 			<li>
 				<span class="h6 text-error-600">Red</span>
