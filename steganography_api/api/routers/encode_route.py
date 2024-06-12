@@ -1,3 +1,5 @@
+import sys
+import traceback
 import json
 import magic
 import cv2
@@ -104,5 +106,7 @@ def encode_file(request):
     except ValueError as e:
         return JsonResponse({'status': 'PAYLOAD_TOO_LARGE'}, status=400)
     except Exception as e:
+        traceback.print_exception(type(e), e, e.__traceback__, file=sys.stderr, chain=True)
+        sys.stderr.flush()
         print(f"Error occurred encoding file :: {e}", flush=True)
         return JsonResponse({'status': 'ERROR'}, status=500)
