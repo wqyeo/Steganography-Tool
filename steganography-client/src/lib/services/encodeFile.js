@@ -1,6 +1,7 @@
 import getApiHttpRoute from "$lib/getApiHttpRoute";
 
 /**
+ * For images, for audio see 'encodeAudio' function
  * @param {string} uuid
  * @param {number[]} redBits
  * @param {number[]} greenBits
@@ -13,7 +14,8 @@ export default async function encodeFile(
     redBits,
     greenBits,
     blueBits,
-    endKey = "==END=="
+    endKey = "==END==",
+    generatorType = "linear"
 ) {
 
     const formData = new FormData();
@@ -23,7 +25,8 @@ export default async function encodeFile(
     formData.append('b_bits', JSON.stringify(blueBits));
     formData.append('message', toEncode);
     formData.append('secret_key', endKey);
-
+    formData.append('generator_Type', generatorType)
+    
     const options = {
         method: 'POST',
         body: formData

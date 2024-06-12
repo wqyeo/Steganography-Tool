@@ -9,6 +9,7 @@
 	import DecodingForms from '$lib/components/picture/DecodingForms.svelte';
 	import decodeFile from '$lib/services/decodeFile';
 	import { goto } from '$app/navigation';
+	import GeneratorTypeSelector from '$lib/components/GeneratorTypeSelector.svelte';
 
 	const toastStore = getToastStore();
 
@@ -20,7 +21,10 @@
 
 	let isDecoding = false;
 
-    let decoded = false;
+    const possibleGenerators = ["linear", "fibonacci", "random"];
+    let selectedGenerator = "linear";
+    
+	let decoded = false;
     let keySuccess = false;
     let decodedMessage = ""
 
@@ -43,7 +47,7 @@
 	async function sendDecodeRequest(secretKey) {
         decoded = false
 		isDecoding = true
-		const jsonData = await decodeFile(originalUUID, redBitsSelection, greenBitsSelection, blueBitsSelection, secretKey);
+		const jsonData = await decodeFile(originalUUID, redBitsSelection, greenBitsSelection, blueBitsSelection, secretKey, selectedGenerator);
 		isDecoding = false
 
 		const status = jsonData.status
@@ -79,6 +83,11 @@
 
 		<hr class="hr !border-t-4 !border mt-5" />
 
+		<h3 class="h3 mt-2">
+			Select Generator
+		</h3>
+		<GeneratorTypeSelector possibleOptions={possibleGenerators} bind:selectedValue={selectedGenerator}/>
+		
 		<!--Bits Selection-->
 		<h3 class="h3 mt-2">Select Bits</h3>
 		<ul class="list">

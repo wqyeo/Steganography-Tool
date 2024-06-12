@@ -11,6 +11,7 @@
 	import { goto } from '$app/navigation';
 	import fetchRelatedFiles from '$lib/services/fetchRelatedFiles';
 	import RelatedFilesTable from '$lib/components/RelatedFilesTable.svelte'
+	import GeneratorTypeSelector from '$lib/components/GeneratorTypeSelector.svelte';
 
 	const toastStore = getToastStore();
 
@@ -25,6 +26,9 @@
 	let blueBitsSelection = [0]
 
 	let isEncoding = false;
+
+    const possibleGenerators = ["linear", "fibonacci", "random"];
+    let selectedGenerator = "linear";
 
 	/**
 	 * @type {any[]}
@@ -68,7 +72,7 @@
 	async function sendEncodeRequest(message, secretKey) {
 		encodedUUID = null
 		isEncoding = true
-		const jsonData = await encodeFile(originalUUID, message, redBitsSelection, greenBitsSelection, blueBitsSelection, secretKey);
+		const jsonData = await encodeFile(originalUUID, message, redBitsSelection, greenBitsSelection, blueBitsSelection, secretKey, selectedGenerator);
 		isEncoding = false
 
 		const status = jsonData.status
@@ -102,6 +106,7 @@
 		goto(`/decode-picture#file_uuid=${fragmentUUID}`);
 	}
 
+
 </script>
 
 <div class="container h-full mx-auto flex justify-center mt-9">
@@ -114,6 +119,11 @@
 		<StartDecodingSelector canDecodeBase={originalUUID != null} canDecodeEncoded={encodedUUID != null} requestDecode={startDecoding}/>
 
 		<hr class="hr !border-t-4 !border mt-5" />
+
+		<h3 class="h3 mt-2">
+			Select Generator
+		</h3>
+		<GeneratorTypeSelector possibleOptions={possibleGenerators} bind:selectedValue={selectedGenerator}/>
 
 		<!--Bits Selection-->
 		<h3 class="h3 mt-2">Select Bits</h3>

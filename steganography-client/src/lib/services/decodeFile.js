@@ -1,6 +1,7 @@
 import getApiHttpRoute from "$lib/getApiHttpRoute";
 
 /**
+ * For images; For picture check 'decodeAudio' function.
  * @param {string} uuid
  * @param {number[]} redBits
  * @param {number[]} greenBits
@@ -11,7 +12,8 @@ export default async function decodeFile(
     redBits,
     greenBits,
     blueBits,
-    endKey = "==END=="
+    endKey = "==END==",
+    generatorType = "linear"
 ) {
 
     const formData = new FormData();
@@ -20,6 +22,7 @@ export default async function decodeFile(
     formData.append('g_bits', JSON.stringify(greenBits));
     formData.append('b_bits', JSON.stringify(blueBits));
     formData.append('secret_key', endKey);
+    formData.append('generator_Type', generatorType)
     
     const options = {
         method: 'POST',
