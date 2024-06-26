@@ -6,10 +6,6 @@ A Steganography Web Application.
 - PNG
 - WAV
 
-Theres a live hosted demo [here](https://stenographic.servebeer.com/).
-
-> ⚠️ DO NOT upload any sensitive photos there. Thats kinda about it. Also, its hosted on a VM with really bad specifications, so processing a larger file might take some time.
-
 ## Development Setup
 
 > Both deployment setup have been tested on Debian 12. No guarantees it will work on other operating systems...
